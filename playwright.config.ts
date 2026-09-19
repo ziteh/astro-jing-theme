@@ -9,7 +9,7 @@ export default defineConfig({
     baseURL: "http://localhost:14321",
   },
   webServer: {
-    command: "pnpm build && pnpm preview --port 14321",
+    command: "pnpm build && ASTRO_PREVIEW_BACKGROUND=0 pnpm preview --port 14321",
     url: "http://localhost:14321",
     reuseExistingServer: !process.env.CI,
   },

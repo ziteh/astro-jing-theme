@@ -1,3 +1,4 @@
+import { unified } from "@astrojs/markdown-remark";
 import sitemap from "@astrojs/sitemap";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import rehypeFigure from "@microflash/rehype-figure";
@@ -30,19 +31,22 @@ export default defineConfig({
     responsiveStyles: true,
   },
   markdown: {
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [
-      // LaTeX math support
-      rehypeKatex,
-      // Transform alt text into figure captions
-      rehypeFigure,
-      // Open external links in a new tab for security
-      [rehypeExternalLinks, { target: "_blank", rel: "noopener noreferrer" }],
-      // Add id attributes to headings (rehypeAutolinkHeadings)
-      rehypeSlug,
-      // Add anchor links to headings
-      [rehypeAutolinkHeadings, { behavior: "append" }],
-    ],
+    // Keep the remark/rehype pipeline for existing plugins
+    processor: unified({
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [
+        // LaTeX math support
+        rehypeKatex,
+        // Transform alt text into figure captions
+        rehypeFigure,
+        // Open external links in a new tab for security
+        [rehypeExternalLinks, { target: "_blank", rel: "noopener noreferrer" }],
+        // Add id attributes to headings (rehypeAutolinkHeadings)
+        rehypeSlug,
+        // Add anchor links to headings
+        [rehypeAutolinkHeadings, { behavior: "append" }],
+      ],
+    }),
     // Use ExpressiveCode instead of built-in syntax highlighting
     syntaxHighlight: false,
   },

@@ -1,5 +1,5 @@
 ---
-import SearchComponent from "astro-pagefind/components/Search";
+import Search from "astro-pagefind/components/Search.astro";
 import { _t } from "@/config";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
@@ -10,11 +10,13 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     <div id="search-skeleton" aria-hidden="true">
       <div class="skeleton-input"></div>
     </div>
-    <SearchComponent
-      id="search"
-      className="pagefind-ui"
-      uiOptions={{ showImages: false, translations: { placeholder: _t.search.title } }}
-    />
+    <div id="search">
+      <Search
+        instance="search"
+        className="pagefind-ui"
+        searchboxOptions={{ placeholder: _t.search.title }}
+      />
+    </div>
   </main>
 </BaseLayout>
 
@@ -23,11 +25,11 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     font-size: var(--font-size-md);
   }
   .pagefind-ui {
-    --pagefind-ui-primary: var(--color-900);
-    --pagefind-ui-text: var(--color-900);
-    --pagefind-ui-background: var(--color-100);
-    --pagefind-ui-border: var(--color-500);
-    --pagefind-ui-tag: var(--color-300);
+    --pf-text: var(--color-900);
+    --pf-background: var(--color-100);
+    --pf-border: var(--color-500);
+    --pf-border-focus: var(--color-900);
+    --pf-mark: var(--color-900);
   }
 
   @keyframes shimmer {
@@ -73,13 +75,13 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
       if (searchEl) searchEl.style.visibility = "visible";
     }
 
-    const input = searchEl?.querySelector<HTMLInputElement>(".pagefind-ui__search-input");
+    const input = searchEl?.querySelector<HTMLInputElement>(".pf-searchbox-input");
     if (input) {
       hideSkeleton();
       input.setAttribute("aria-label", input.title || "Search");
     } else {
       const observer = new MutationObserver(() => {
-        const el = searchEl?.querySelector<HTMLInputElement>(".pagefind-ui__search-input");
+        const el = searchEl?.querySelector<HTMLInputElement>(".pf-searchbox-input");
         if (el) {
           observer.disconnect();
           hideSkeleton();
