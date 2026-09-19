@@ -6,6 +6,7 @@ tags:
   - Docs
   - MD
 toc: true
+math: true
 ---
 
 Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.
@@ -187,6 +188,30 @@ we can use 3 backticks ``` in new line and write snippet and close with 3 backti
 - Dairy
   - Milk
   - Cheese
+
+## Math
+
+### Syntax
+
+```markdown
+Inline math: $E = mc^2$
+
+Block math:
+
+$$
+\int_0^\infty e^{-x^2} \, dx = \frac{\sqrt{\pi}}{2}
+$$
+```
+
+### Output
+
+Inline math: $E = mc^2$
+
+Block math:
+
+$$
+\int_0^\infty e^{-x^2} \, dx = \frac{\sqrt{\pi}}{2}
+$$
 
 ## Other Elements — abbr, sub, sup, kbd, mark
 

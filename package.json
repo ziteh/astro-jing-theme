@@ -16,6 +16,8 @@
     "test:a11y": "playwright test tests/a11y.spec.ts",
     "test:urls": "playwright test tests/urls.spec.ts",
     "test:sidebar": "playwright test tests/sidebar.spec.ts",
+    "test:expressive-code": "playwright test tests/expressive-code.spec.ts",
+    "test:katex": "playwright test tests/katex.spec.ts",
     "test:lh": "pnpm build && lhci autorun",
     "seonaut:up": "podman compose -f docker-compose-seonaut.yml up -d",
     "seonaut:down": "podman compose -f docker-compose-seonaut.yml down",
