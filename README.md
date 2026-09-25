@@ -87,3 +87,7 @@ Open <http://localhost:9000/signin> and enter <http://host.containers.internal:4
 ## Deploy
 
 - [Cloudflare Pages build system](https://developers.cloudflare.com/pages/configuration/build-image/#languages-and-runtime)
+
+> [!IMPORTANT]
+> Demo Site Notice
+> `public/_headers` sets `X-Robots-Tag: noindex` to keep the demo site out of search engine indexing. **Delete this file before deploying to production.**
