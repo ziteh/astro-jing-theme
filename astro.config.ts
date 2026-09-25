@@ -106,6 +106,11 @@ export default defineConfig({
     }),
     // Sitemap generation
     sitemap({
+      // Exclude list pages from the sitemap
+      filter: (page) => {
+        const path = new URL(page).pathname;
+        return !/^\/(tags|categories|archives|search)(\/|$)|^\/posts(\/\d+)?$/.test(path);
+      },
       serialize(item) {
         if (/\/posts\//.test(item.url)) {
           // Blog posts
