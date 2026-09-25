@@ -78,9 +78,6 @@ importers:
       '@types/lodash.kebabcase':
         specifier: ^4.1.9
         version: 4.1.9
-      astro-compressor:
-        specifier: ^2.0.1
-        version: 2.0.1
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -1330,10 +1327,6 @@ packages:
   astring@1.9.0:
     resolution: {integrity: sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==}
     hasBin: true
-
-  astro-compressor@2.0.1:
-    resolution: {integrity: sha512-4dgQUlhBkwuRMfGRjFh52s5YO9fKkcgmdzCXsbFPFt/f2Uu1XWsrLmHsdt7/en2F8Wqd65CHVeOHmbpBXFFg4g==}
-    engines: {node: '>=24'}
 
   astro-expressive-code@0.44.2:
     resolution: {integrity: sha512-avop7nZcRwC7quvIxVguhwEZ9Tp6IoTzKUCLwP30Fb7+er+pWQgcysP01dcuzRIJo81kLGg30q/YAI2Yb1Sdzg==}
@@ -4999,8 +4992,6 @@ snapshots:
       tslib: 2.8.1
 
   astring@1.9.0: {}
-
-  astro-compressor@2.0.1: {}
 
   astro-expressive-code@0.44.2(astro@7.3.3(@astrojs/markdown-remark@7.3.1)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.1.2)(terser@5.49.2)(yaml@2.8.3)):
     dependencies:

@@ -4,7 +4,6 @@ import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import rehypeFigure from "@microflash/rehype-figure";
 import playformCompress from "@playform/compress";
 import { defineConfig, fontProviders } from "astro/config";
-import astroCompressor from "astro-compressor";
 import expressiveCode from "astro-expressive-code";
 import pagefind from "astro-pagefind";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -125,7 +124,6 @@ export default defineConfig({
     pagefind(),
     // Compression
     playformCompress(),
-    astroCompressor({ gzip: true, zstd: true, brotli: true }),
   ],
   // https://docs.astro.build/en/guides/fonts/
   fonts: [
