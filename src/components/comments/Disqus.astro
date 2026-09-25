@@ -15,12 +15,11 @@ const disqusShortname = SITE.disqusShortname;
 <div id="disqus_thread"></div>
 <script is:inline define:vars={{ url, identifier, disqusShortname }}>
   (function () {
-    var disqus_config = function () {
-      this.page.url = url;
-      this.page.identifier = identifier;
-    };
-
     function loadDisqus() {
+      window.disqus_config = function () {
+        this.page.url = url;
+        this.page.identifier = identifier;
+      };
       var d = document,
         s = d.createElement("script");
       s.src = "https://" + disqusShortname + ".disqus.com/embed.js";
