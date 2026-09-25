@@ -96,7 +96,7 @@ const en = (() => {
 })();
 
 // You can create your own language pack by modifying the `myLang` object
-// biome-ignore lint/correctness/noUnusedVariables: keep as an example
+/*
 const myLang: typeof en = (() => {
   const lang = "zh-TW"; // BCP 47 language tag
   const langOg = "zh_TW"; // Open Graph locale tag
@@ -186,6 +186,7 @@ const myLang: typeof en = (() => {
     },
   };
 })();
+*/
 
-// Select your language pack
+// Select your language pack, such as `en`, `myLang`
 export const _t: typeof en = en;
