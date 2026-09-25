@@ -12,6 +12,7 @@
     "lint": "biome check --write",
     "lint:check": "biome check",
     "type:check": "tsc --noEmit",
+    "astro:check": "astro check",
     "test": "playwright test",
     "test:a11y": "playwright test tests/a11y.spec.ts",
     "test:urls": "playwright test tests/urls.spec.ts",
@@ -44,6 +45,7 @@
     "tocbot": "^4.36.4"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.10",
     "@axe-core/playwright": "^4.11.2",
     "@biomejs/biome": "2.4.12",
     "@lhci/cli": "^0.15.1",
