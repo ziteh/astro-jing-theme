@@ -1,0 +1,6 @@
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+/og.png
+  Cache-Control: public, max-age=31556952, immutable
+/posts/*-og.png
+  Cache-Control: public, max-age=31556952, immutable

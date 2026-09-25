@@ -56,7 +56,6 @@ export async function renderOgImage(element: any, url: URL): Promise<Response> {
   return new Response(png as BodyInit, {
     headers: {
       "Content-Type": "image/png",
-      "Cache-Control": "public, max-age=31536000, immutable",
     },
   });
 }
