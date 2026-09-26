@@ -1,14 +1,14 @@
 import type { APIRoute, GetStaticPaths } from "astro";
 import { _t, SITE } from "@/config";
 import getPosts from "@/utils/getPosts";
-import { hashOgContent, OG_COLORS, OG_FONT_FAMILY, renderOgImage } from "@/utils/ogImage";
+import { getPostOgHash, OG_COLORS, OG_FONT_FAMILY, renderOgImage } from "@/utils/ogImage";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getPosts();
   return posts.map((post) => ({
     params: {
       slug: post.id,
-      hash: hashOgContent(post.data.title, post.data.date.toISOString(), ...(post.data.tags ?? [])),
+      hash: getPostOgHash(post.data.title, post.data.date, post.data.tags),
     },
     props: {
       title: post.data.title,
