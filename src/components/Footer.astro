@@ -6,7 +6,9 @@ const today = new Date();
 
 <footer>
   <span
-    >&copy;&nbsp;{today.getFullYear()}&nbsp;<a href="/about">{SITE.author}</a>. All rights reserved.</span
+    >&copy;&nbsp;{today.getFullYear()}&nbsp;<a href="/about">{SITE.author}</a>.&nbsp;{
+      _t.rightsStatement
+    }</span
   >
   <div class="social-links">
     {

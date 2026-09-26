@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { SITE } from "@/config";
+import { _t, SITE } from "@/config";
 import getBlogPosts from "@/utils/getPosts";
 
 export async function getStaticPaths() {
@@ -33,6 +33,8 @@ export const GET: APIRoute = async ({ props }) => {
     updated !== date ? `updated: ${updated}` : null,
     tags.length > 0 ? `tags: [${tagsStr}]` : null,
     categories.length > 0 ? `categories: [${categoriesStr}]` : null,
+    `author: '${SITE.author}'`,
+    `rights: '${_t.rightsStatement}'`,
   ]
     .filter(Boolean)
     .join("\n");
