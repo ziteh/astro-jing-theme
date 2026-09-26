@@ -1,3 +1,5 @@
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { unified } from "@astrojs/markdown-remark";
 import sitemap from "@astrojs/sitemap";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
@@ -11,7 +13,11 @@ import rehypeExternalLinks from "rehype-external-links";
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import remarkMath from "remark-math";
+import { CONTENT_DIR } from "./src/config/content-dir";
 import { SITE } from "./src/config/site";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const contentDirAbsolute = path.resolve(__dirname, CONTENT_DIR);
 
 // https://astro.build/config
 export default defineConfig({
@@ -162,6 +168,9 @@ export default defineConfig({
   vite: {
     server: {
       allowedHosts: ["host.containers.internal"],
+      fs: {
+        allow: [contentDirAbsolute, path.resolve(__dirname, "..")],
+      },
     },
   },
 });

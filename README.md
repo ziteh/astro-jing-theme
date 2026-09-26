@@ -24,6 +24,39 @@ pnpm build      # Production build
 pnpm preview    # Preview built site
 ```
 
+### Using as a Git Submodule
+
+This theme can be used as a git submodule in your own blog repo, keeping your content separate from theme updates.
+
+project structure:
+
+```text
+my-blog/                  # Your blog repo
+├── theme/                # astro-theme-jing (submodule)
+│   ├── astro.config.ts
+│   ├── content.config.ts
+│   ├── package.json
+│   ├── src/
+│   ├── .env              # CONTENT_DIR=../content
+│   └── ...
+└── content/              # Your blog content
+    ├── blog/
+    │   └── post.md
+    └── about.md
+```
+
+```bash
+cd my-blog
+mkdir -p content/blog
+touch content/about.md && touch content/blog/post.md
+# Then edit the content files
+
+git submodule add https://github.com/ziteh/astro-theme-jin theme
+cd theme
+echo "CONTENT_DIR=../content" > .env
+pnpm i && pnpm build
+```
+
 ## Development
 
 Tech stack:
@@ -87,3 +120,8 @@ Open <http://localhost:9000/signin> and enter <http://host.containers.internal:4
 ## Deploy
 
 - [Cloudflare Pages build system](https://developers.cloudflare.com/pages/configuration/build-image/#languages-and-runtime)
+
+Deployment platform support for [git submodules](#using-as-a-git-submodule) varies:
+
+- **Netlify**: Supported, see [Git submodules](https://docs.netlify.com/build/git-workflows/repo-permissions-linking/#git-submodules).
+- **Cloudflare Pages**: No built-in support. Build with GitHub Actions (checkout with `submodules: recursive`) and deploy the output with [cloudflare/wrangler-action](https://github.com/cloudflare/wrangler-action) instead.
