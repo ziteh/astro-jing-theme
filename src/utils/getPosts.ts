@@ -11,7 +11,7 @@ const getBlogPosts = async (): Promise<BlogPost[]> => {
   const posts = await getCollection("blog");
   return posts
     .filter((post) => {
-      if (post.data.draft) return false;
+      if (import.meta.env.PROD && post.data.draft) return false;
       if (post.data.date > new Date()) return false;
       return true;
     })
