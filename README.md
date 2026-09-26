@@ -6,7 +6,7 @@ Features:
 
 - Auto-generate post descriptions based on character count or up to the `<!-- more -->` tag
 - Auto-expanding & collapsing table of contents
-- Open Graph image generation
+- Generate Open Graph images with hashed filenames
 - Full-text search
 - Syntax highlighting
 - Math equations
@@ -17,7 +17,10 @@ Features:
 
 ## Usage
 
+You can directly [create a new repo from this template](https://github.com/new?template_name=astro-jing-theme&template_owner=ziteh), or use this repo as a [git subtree](#using-as-a-git-subtree).
+
 ```bash
+# After cloning...
 pnpm i          # Install dependencies
 pnpm dev        # Start dev server
 pnpm build      # Production build
@@ -51,7 +54,7 @@ my-blog/                  # Your blog repo
 cd my-blog
 mkdir -p content/blog
 touch content/about.md && touch content/blog/post.md
-# Then edit the content files
+# Then edit the content files and commit
 
 git subtree add --prefix theme https://github.com/ziteh/astro-theme-jing main --squash
 cd theme
