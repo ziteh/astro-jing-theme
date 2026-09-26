@@ -27,6 +27,7 @@ Features:
 - Comment systems (Giscus / Disqus)
 - Sitemap & RSS feed
 - Static site
+- View the post as Markdown
 
 ## Usage
 
@@ -79,30 +80,31 @@ There are some settings that need to be adjusted before deployment.
 
 Basic site information and feature toggles.
 
-| Field                    | Description                                                      | Example                      |
-| ------------------------ | ---------------------------------------------------------------- | ---------------------------- |
-| **`url`\***              | Your site's URL                                                  | `https://username.github.io` |
-| **`title`\***            | Blog title                                                       | `My Blog`                    |
-| **`description`\***      | Blog description                                                 | `A personal blog`            |
-| **`author`\***           | Blog author name                                                 | `ZiTe`                       |
-| `postsPerHomepage`       | Posts to display per page ([home](/))                            | `3`                          |
-| `postsPerArchives`       | Posts to display per page ([archives](/archives))                | `10`                         |
-| `postsPerAllPosts`       | Posts to display per page ([posts](/posts))                      | `5`                          |
-| `getDescriptionCount`    | Character count for auto-description                             | `150`                        |
-| `getDescriptionMaxLines` | Max lines to process for auto-description                        | `10`                         |
-| `defaultFmTag`           | Default tag for posts                                            | `Others`                     |
-| `defaultFmCategory`      | Default category for posts                                       | `""`                         |
-| `defaultFmToc`           | Enable table of contents by default                              | `false`                      |
-| `defaultFmComments`      | Enable comments by default                                       | `false`                      |
-| `defaultFmMath`          | Enable math equations by default                                 | `false`                      |
-| `transitions`            | Enable [view transitions][astro-vt]                              | `true`                       |
-| `postMdUrl`              | Generate a Markdown version of your blog posts for LLMs to crawl | `false`                      |
-| `llmsTxt`                | Generate llms.txt for LLMs to crawl your blog posts              | `false`                      |
-| `disqusShortname`        | Disqus shortname                                                 | `your-disqus-shortname`      |
-| `giscusRepo`             | Giscus repository                                                | `user/repo`                  |
-| `giscusRepoId`           | Giscus repository ID                                             |                              |
-| `giscusCategory`         | Giscus category name                                             |                              |
-| `giscusCategoryId`       | Giscus category ID                                               |                              |
+| Field                    | Description                                                                       | Example                      |
+| ------------------------ | --------------------------------------------------------------------------------- | ---------------------------- |
+| **`url`\***              | Your site's URL                                                                   | `https://username.github.io` |
+| **`title`\***            | Blog title                                                                        | `My Blog`                    |
+| **`description`\***      | Blog description                                                                  | `A personal blog`            |
+| **`author`\***           | Blog author name                                                                  | `ZiTe`                       |
+| `postsPerHomepage`       | Posts to display per page ([home](/))                                             | `3`                          |
+| `postsPerArchives`       | Posts to display per page ([archives](/archives))                                 | `10`                         |
+| `postsPerAllPosts`       | Posts to display per page ([posts](/posts))                                       | `5`                          |
+| `getDescriptionCount`    | Character count for auto-description                                              | `150`                        |
+| `getDescriptionMaxLines` | Max lines to process for auto-description                                         | `10`                         |
+| `defaultFmTag`           | Default tag for posts                                                             | `Others`                     |
+| `defaultFmCategory`      | Default category for posts                                                        | `""`                         |
+| `defaultFmToc`           | Enable table of contents by default                                               | `false`                      |
+| `defaultFmComments`      | Enable comments by default                                                        | `false`                      |
+| `defaultFmMath`          | Enable math equations by default                                                  | `false`                      |
+| `transitions`            | Enable [view transitions][astro-vt]                                               | `true`                       |
+| `postMdUrl`              | Generate a Markdown version of your blog posts for LLMs to crawl                  | `false`                      |
+| `llmsTxt`                | Generate llms.txt for LLMs to crawl your blog posts (need `postMdUrl` to be true) | `false`                      |
+| `viewAsMD`               | Add a "View as Markdown" button to post sidebar (need `postMdUrl` to be true)     | `false`                      |
+| `disqusShortname`        | Disqus shortname                                                                  | `your-disqus-shortname`      |
+| `giscusRepo`             | Giscus repository                                                                 | `user/repo`                  |
+| `giscusRepoId`           | Giscus repository ID                                                              |                              |
+| `giscusCategory`         | Giscus category name                                                              |                              |
+| `giscusCategoryId`       | Giscus category ID                                                                |                              |
 
 > **\***: important
 

@@ -14,6 +14,7 @@ Features:
 - Comment systems (Giscus / Disqus)
 - Sitemap & RSS feed
 - Static site
+- View the post as Markdown
 
 ## Usage
 

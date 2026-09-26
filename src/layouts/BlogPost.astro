@@ -78,6 +78,17 @@ const ogImage = `/og-images/posts/${slug}.${getPostOgHash(title, date, tags)}.pn
       <aside class="sidebar">
         {toc && <nav class="toc" aria-label="Table of contents" />}
         <button class="back-to-top" id="back-to-top" type="button">{_t.common.backToTop}</button>
+        {
+          SITE.viewAsMD && SITE.postMdUrl && (
+            <a
+              class="markdown-link"
+              href={`${Astro.url.pathname.replace(/\/$/, "")}.md`}
+              title="View as Markdown"
+            >
+              Markdown
+            </a>
+          )
+        }
       </aside>
     </div>
     <div class="article-footer">
