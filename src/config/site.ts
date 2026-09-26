@@ -28,6 +28,9 @@ export const SITE = {
   // Config
   transitions: true, // View transitions (https://docs.astro.build/en/guides/view-transitions/)
 
+  // LLM / AI
+  postMdUrl: false, // Generate a Markdown version of your blog posts for LLMs to crawl
+
   // Disqus comments
   disqusShortname: "", // Your Disqus shortname (without https:// and .disqus.com)
 
