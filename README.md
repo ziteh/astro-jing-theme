@@ -42,10 +42,7 @@ my-blog/                  # Your blog repo
 └── content/              # Your blog content
     ├── blog/
     │   └── post.md
-    ├── about.md
-    ├── site.config.json      # Optional, overrides src/config/site.ts
-    ├── socials.config.json   # Optional, replaces src/config/socials.ts
-    └── lang.config.json      # Optional, overrides src/config/lang.ts
+    └── about.md
 ```
 
 ```bash
@@ -58,58 +55,6 @@ git submodule add https://github.com/ziteh/astro-theme-jin theme
 cd theme
 echo "CONTENT_DIR=../content" > .env
 pnpm i && pnpm build
-```
-
-`site.config.json`, `socials.config.json` and `lang.config.json` are optional and read from `CONTENT_DIR`, so your config stay outside the theme submodule too. Without them, the theme falls back to its own [defaults](src/config/).
-
-> Currently, `astro.config.ts` cannot be overridden; if necessary, this may need to be handled through additional git operations.
-
-for example:
-
-```jsonc
-// site.config.json
-// any subset of the fields in src/config/site.ts
-{ "title": "My Blog", "author": "Me", "url": "https://example.com" }
-```
-
-```jsonc
-// socials.config.json
-// replaces the whole list
-[{ "href": "https://github.com/me", "title": "GitHub" }]
-```
-
-```jsonc
-// lang.config.json
-// any subset of the fields in src/config/lang.ts
-// missing fields fall back to English
-{
-  "lang": "zh-TW",
-  "langOg": "zh_TW",
-  "timeZone": "Asia/Taipei",
-  "posts": { "title": "文章", "desc": "所有文章" },
-  "tags": { "title": "標籤", "desc": "所有標籤", "pageTitle": "標籤：{name}" },
-  "categories": { "title": "分類", "desc": "所有分類", "pageTitle": "分類：{name}" },
-  "search": { "title": "搜尋", "desc": "搜尋文章" },
-  "about": { "title": "關於", "desc": "關於我" },
-  "archives": {
-    "title": "彙整",
-    "desc": "所有文章",
-    "totalZero": "目前沒有文章",
-    "totalOne": "共 1 篇文章",
-    "totalMany": "共 {count} 篇文章",
-  },
-  "notFound": { "title": "找不到頁面", "desc": "您要找的頁面不存在。" },
-  "common": {
-    "backToTop": "回到頂端",
-    "viewAllPosts": "查看所有文章",
-    "rssFeed": "訂閱 RSS",
-    "featuredPost": "精選",
-    "recentPost": "最新",
-    "skipToMain": "跳到主要內容",
-  },
-  "pagination": { "next": "下一頁", "prev": "上一頁" },
-  "date": { "postedOn": "發佈於 {date}" },
-}
 ```
 
 ## Development
