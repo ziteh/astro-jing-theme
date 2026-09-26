@@ -1,6 +1,6 @@
 <!-- markdownlint-disable first-line-h1 -->
 
-[Astro Jing](https://github.com/ziteh/astro-theme-jing) is a calm blog theme powered by [Astro](https://astro.build/).
+[Astro Jing](https://github.com/ziteh/astro-jing-theme) is a calm blog theme powered by [Astro](https://astro.build/).
 
 Features:
 

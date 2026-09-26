@@ -37,7 +37,7 @@ project structure:
 
 ```text
 my-blog/                  # Your blog repo
-├── theme/                # astro-theme-jing (subtree)
+├── theme/                # astro-jing-theme (subtree)
 │   ├── astro.config.ts
 │   ├── package.json
 │   ├── src/
@@ -56,7 +56,7 @@ mkdir -p content/blog
 touch content/about.md && touch content/blog/post.md
 # Then edit the content files and commit
 
-git subtree add --prefix theme https://github.com/ziteh/astro-theme-jing main --squash
+git subtree add --prefix theme https://github.com/ziteh/astro-jing-theme main --squash
 cd theme
 echo "CONTENT_DIR=../content" > .env
 # Now edit src/config/site.ts, socials.ts, lang.ts, astro.config.ts, etc. directly
@@ -66,7 +66,7 @@ pnpm i && pnpm build
 To pull in later theme updates:
 
 ```bash
-git subtree pull --prefix theme https://github.com/ziteh/astro-theme-jing main --squash
+git subtree pull --prefix theme https://github.com/ziteh/astro-jing-theme main --squash
 ```
 
 ## Development

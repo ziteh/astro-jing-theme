@@ -11,7 +11,7 @@ toc: true
 comments: false
 ---
 
-[**Astro Jing**](https://github.com/ziteh/astro-theme-jing) is a calm blog theme powered by [Astro](https://astro.build/). This post will show you how to use it.
+[**Astro Jing**](https://github.com/ziteh/astro-jing-theme) is a calm blog theme powered by [Astro](https://astro.build/). This post will show you how to use it.
 
 <!-- more -->
 
@@ -31,8 +31,8 @@ Features:
 ## Usage
 
 ```bash
-git clone https://github.com/ziteh/astro-theme-jing.git
-cd astro-theme-jing
+git clone https://github.com/ziteh/astro-jing-theme.git
+cd astro-jing-theme
 pnpm i
 pnpm dev
 ```
@@ -75,7 +75,7 @@ There are some settings that need to be adjusted before deployment.
 
 ### site.ts
 
-> [`src/config/site.ts`](https://github.com/ziteh/astro-theme-jing/blob/main/src/config/site.ts)
+> [`src/config/site.ts`](https://github.com/ziteh/astro-jing-theme/blob/main/src/config/site.ts)
 
 Basic site information and feature toggles.
 
@@ -106,7 +106,7 @@ Basic site information and feature toggles.
 
 ### lang.ts
 
-> [`src/config/lang.ts`](https://github.com/ziteh/astro-theme-jing/blob/main/src/config/lang.ts)
+> [`src/config/lang.ts`](https://github.com/ziteh/astro-jing-theme/blob/main/src/config/lang.ts)
 
 Internationalization (i18n) language and locale settings.
 
@@ -120,7 +120,7 @@ To add a new language, modify the `myLang` object following the `en` template an
 
 ### socials.ts
 
-> [`src/config/socials.ts`](https://github.com/ziteh/astro-theme-jing/blob/main/src/config/socials.ts)
+> [`src/config/socials.ts`](https://github.com/ziteh/astro-jing-theme/blob/main/src/config/socials.ts)
 
 Social media links displayed in the site footer.
 
@@ -140,7 +140,7 @@ Example:
 
 ### astro.config.ts
 
-> [`astro.config.ts`](https://github.com/ziteh/astro-theme-jing/blob/main/astro.config.ts)
+> [`astro.config.ts`](https://github.com/ziteh/astro-jing-theme/blob/main/astro.config.ts)
 
 Astro config, please refer to [Configuration overview](https://docs.astro.build/en/guides/configuring-astro/) and [Configuration Reference](https://docs.astro.build/en/reference/configuration-reference/).
 

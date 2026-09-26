@@ -8,7 +8,7 @@ export const SOCIALS = [
     title: "YouTube",
   },
   {
-    href: "https://github.com/ziteh/astro-theme-jing",
+    href: "https://github.com/ziteh/astro-jing-theme",
     title: "GitHub",
   },
   {
