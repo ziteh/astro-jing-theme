@@ -4,18 +4,20 @@ import { _t } from "@/config";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title={_t.search.title} description={_t.search.desc}>
+<BaseLayout title={_t.search.title} description={_t.search.desc} noindex>
   <main id="main-content">
     <h1 class="sr-only">{_t.search.title}</h1>
-    <div id="search-skeleton" aria-hidden="true">
-      <div class="skeleton-input"></div>
-    </div>
-    <div id="search">
-      <Search
-        instance="search"
-        className="pagefind-ui"
-        searchboxOptions={{ placeholder: _t.search.title }}
-      />
+    <div id="search-stack">
+      <div id="search-skeleton" aria-hidden="true">
+        <div class="skeleton-input"></div>
+      </div>
+      <div id="search">
+        <Search
+          instance="search"
+          className="pagefind-ui"
+          searchboxOptions={{ placeholder: _t.search.title }}
+        />
+      </div>
     </div>
   </main>
 </BaseLayout>
@@ -41,17 +43,30 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
     }
   }
 
-  #search-skeleton {
+  #search-stack {
+    display: grid;
     padding: 0.75rem 0;
+  }
+
+  #search-stack > * {
+    grid-area: 1 / 1;
   }
 
   #search {
     visibility: hidden;
   }
 
+  .pagefind-ui .pf-searchbox {
+    display: block !important;
+    margin: 0 auto !important;
+  }
+
   .skeleton-input {
-    height: 3rem;
-    border-radius: 0.5rem;
+    box-sizing: border-box;
+    max-width: var(--pf-searchbox-max-width, 480px);
+    margin: 0 auto;
+    height: 36px;
+    border-radius: 6px;
     border: 1px solid var(--color-500);
     background: var(--color-300);
     background-image: linear-gradient(
