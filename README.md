@@ -24,15 +24,17 @@ pnpm build      # Production build
 pnpm preview    # Preview built site
 ```
 
-### Using as a Git Submodule
+### Using as a Git Subtree
 
-This theme can be used as a git submodule in your own blog repo, keeping your content separate from theme updates.
+This theme can be pulled into your own blog repo as a git subtree, so your content lives alongside it in one repo, and you can still pull in future theme updates.
+
+Unlike a git submodule, the theme files (`src/config/*.ts`, `astro.config.ts`, etc.) become regular files in your repo, so you're free to edit them directly. Theme updates are then just a normal `git subtree pull`; if you've edited a file the update also touches, git will ask you to resolve the conflict like any other merge.
 
 project structure:
 
 ```text
 my-blog/                  # Your blog repo
-├── theme/                # astro-theme-jing (submodule)
+├── theme/                # astro-theme-jing (subtree)
 │   ├── astro.config.ts
 │   ├── content.config.ts
 │   ├── package.json
@@ -51,10 +53,17 @@ mkdir -p content/blog
 touch content/about.md && touch content/blog/post.md
 # Then edit the content files
 
-git submodule add https://github.com/ziteh/astro-theme-jin theme
+git subtree add --prefix theme https://github.com/ziteh/astro-theme-jin main --squash
 cd theme
 echo "CONTENT_DIR=../content" > .env
+# Now edit src/config/site.ts, socials.ts, lang.ts, astro.config.ts, etc. directly
 pnpm i && pnpm build
+```
+
+To pull in later theme updates:
+
+```bash
+git subtree pull --prefix theme https://github.com/ziteh/astro-theme-jin main --squash
 ```
 
 ## Development
@@ -120,8 +129,3 @@ Open <http://localhost:9000/signin> and enter <http://host.containers.internal:4
 ## Deploy
 
 - [Cloudflare Pages build system](https://developers.cloudflare.com/pages/configuration/build-image/#languages-and-runtime)
-
-Deployment platform support for [git submodules](#using-as-a-git-submodule) varies:
-
-- **Netlify**: Supported, see [Git submodules](https://docs.netlify.com/build/git-workflows/repo-permissions-linking/#git-submodules).
-- **Cloudflare Pages**: No built-in support. Build with GitHub Actions (checkout with `submodules: recursive`) and deploy the output with [cloudflare/wrangler-action](https://github.com/cloudflare/wrangler-action) instead.
