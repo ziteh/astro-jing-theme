@@ -43,7 +43,7 @@ Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sap
 
 ### Output
 
-![blog placeholder](../../assets/blog-placeholder-about.jpg)
+![SideraKB ErgoSNM Kerboard](../../assets/siderakb-ergosnm.jpg)
 
 ## Blockquotes
 
