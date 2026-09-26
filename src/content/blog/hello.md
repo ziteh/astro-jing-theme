@@ -41,7 +41,7 @@ pnpm dev
 
 ### Posts
 
-Place your post `.md` files in the `src/content/blog/` directory.
+By default, place your post `.md` files in the `src/content/blog/` directory. Set `CONTENT_DIR` to use a different content root.
 
 #### Frontmatter
 
@@ -126,19 +126,15 @@ Social media links displayed in the site footer.
 
 Each social link object contains:
 
-- `name`: Display name
-- `title`: Hover text
+- `title`: Link display text
 - `href`: URL to the social profile
-- `icon`: SVG icon component
 
 Example:
 
 ```ts
 {
-  name: "GitHub",
   title: "My GitHub",
   href: "https://github.com/username",
-  icon: IconGitHub,
 }
 ```
 
@@ -165,43 +161,44 @@ You can adjust `getDescriptionCount` and `getDescriptionMaxLines` in [`site.ts`]
 
 ### Fonts
 
-By default, Astro Jing downloads **Noto Sans** (body) and **Fira Mono** (code) at build time via [Astro's built-in font API](https://docs.astro.build/en/guides/fonts/).
+By default, Astro Jing downloads **Geist** (body) and **Fira Mono** (code) at build time via [Astro's built-in font API](https://docs.astro.build/en/guides/fonts/).
 
 If you prefer **system-native fonts** — for example, to use Traditional Chinese fonts like PingFang TC / Microsoft JhengHei without any web font download — you can switch manually:
 
 1. `astro.config.ts` — Remove the `--font-body` and `--font-mono` entries from the `fonts` array. Keep `--font-og` (Satori needs it to generate OG images).
 
-```ts
-fonts: [
-  // Remove --font-body and --font-mono entries
-  {
-    cssVariable: "--font-og",
-    name: "Noto Sans",
-    weights: [400],
-    styles: ["normal"],
-    formats: ["woff"],
-    provider: fontProviders.fontsource(),
-  },
-],
-```
+   ```ts
+   fonts: [
+     // Remove --font-body and --font-mono entries
+     {
+       cssVariable: "--font-og",
+       name: "Noto Sans",
+       weights: [400],
+       styles: ["normal"],
+       formats: ["woff"],
+       provider: fontProviders.fontsource(),
+     },
+   ],
+   ```
 
 2. `src/layouts/BaseLayout.astro` — Replace the two `<Font>` tags with an inline style that defines the CSS variables directly:
 
-```astro
-<!-- Replace: -->
-<Font cssVariable="--font-body" preload />
-<Font cssVariable="--font-mono" />
+   ```astro
+   <!-- Replace: -->
+   <Font cssVariable="--font-body" preload />
+   <Font cssVariable="--font-mono" />
 
-<!-- With: -->
-<style is:inline>
-  :root {
-    --font-body:
-      "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, -apple-system,
-      BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --font-mono: ui-monospace, "Cascadia Code", Menlo, Monaco, Consolas, "Courier New", monospace;
-  }
-</style>
-```
+   <!-- With: -->
+   <style is:inline>
+     :root {
+       --font-body:
+         "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, -apple-system,
+         BlinkMacSystemFont, "Segoe UI", sans-serif;
+       --font-mono:
+         ui-monospace, "Cascadia Code", Menlo, Monaco, Consolas, "Courier New", monospace;
+     }
+   </style>
+   ```
 
 > Use `is:inline` so Astro does not scope the `<style>` tag — scoped styles would prevent `:root` from applying globally.
 

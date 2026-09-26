@@ -36,9 +36,9 @@ project structure:
 my-blog/                  # Your blog repo
 ├── theme/                # astro-theme-jing (subtree)
 │   ├── astro.config.ts
-│   ├── content.config.ts
 │   ├── package.json
 │   ├── src/
+│   │   └── content.config.ts
 │   ├── .env              # CONTENT_DIR=../content
 │   └── ...
 └── content/              # Your blog content
@@ -53,7 +53,7 @@ mkdir -p content/blog
 touch content/about.md && touch content/blog/post.md
 # Then edit the content files
 
-git subtree add --prefix theme https://github.com/ziteh/astro-theme-jin main --squash
+git subtree add --prefix theme https://github.com/ziteh/astro-theme-jing main --squash
 cd theme
 echo "CONTENT_DIR=../content" > .env
 # Now edit src/config/site.ts, socials.ts, lang.ts, astro.config.ts, etc. directly
@@ -63,7 +63,7 @@ pnpm i && pnpm build
 To pull in later theme updates:
 
 ```bash
-git subtree pull --prefix theme https://github.com/ziteh/astro-theme-jin main --squash
+git subtree pull --prefix theme https://github.com/ziteh/astro-theme-jing main --squash
 ```
 
 ## Development
@@ -128,4 +128,5 @@ Open <http://localhost:9000/signin> and enter <http://host.containers.internal:4
 
 ## Deploy
 
+- [Deploy your Astro Site](https://docs.astro.build/en/guides/deploy/)
 - [Cloudflare Pages build system](https://developers.cloudflare.com/pages/configuration/build-image/#languages-and-runtime)
