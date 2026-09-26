@@ -73,6 +73,8 @@ The Markdown for [about page](/about) is: `src/content/about.md`.
 
 There are some settings that need to be adjusted before deployment.
 
+When using Astro Jing as a [git submodule](https://github.com/ziteh/astro-theme-jing#using-as-a-git-submodule), `site.ts`, `socials.ts` and `lang.ts` can each be overridden by a `*.config.json` file placed outside the theme, so your customizations survive theme updates.
+
 ### site.ts
 
 > [`src/config/site.ts`](https://github.com/ziteh/astro-theme-jing/blob/main/src/config/site.ts)
@@ -116,7 +118,7 @@ Key settings:
 - `langOg`: [Open Graph][og-locale] locale tag (e.g., `en_US`, `zh_TW`)
 - `timeZone`: [IANA][iana-tz] time zone (e.g., `America/New_York`, `Asia/Taipei`)
 
-To add a new language, modify the `myLang` object following the `en` template and update the exported `_t` constant.
+To add a new language, override any subset of these fields from `<CONTENT_DIR>/lang.config.json`; fields not overridden fall back to the English defaults. See [Using as a Git Submodule](https://github.com/ziteh/astro-theme-jing#using-as-a-git-submodule) for details.
 
 ### socials.ts
 
@@ -126,19 +128,15 @@ Social media links displayed in the site footer.
 
 Each social link object contains:
 
-- `name`: Display name
 - `title`: Hover text
 - `href`: URL to the social profile
-- `icon`: SVG icon component
 
 Example:
 
 ```ts
 {
-  name: "GitHub",
-  title: "My GitHub",
+  title: "GitHub",
   href: "https://github.com/username",
-  icon: IconGitHub,
 }
 ```
 
@@ -171,37 +169,38 @@ If you prefer **system-native fonts** — for example, to use Traditional Chines
 
 1. `astro.config.ts` — Remove the `--font-body` and `--font-mono` entries from the `fonts` array. Keep `--font-og` (Satori needs it to generate OG images).
 
-```ts
-fonts: [
-  // Remove --font-body and --font-mono entries
-  {
-    cssVariable: "--font-og",
-    name: "Noto Sans",
-    weights: [400],
-    styles: ["normal"],
-    formats: ["woff"],
-    provider: fontProviders.fontsource(),
-  },
-],
-```
+   ```ts
+   fonts: [
+     // Remove --font-body and --font-mono entries
+     {
+       cssVariable: "--font-og",
+       name: "Noto Sans",
+       weights: [400],
+       styles: ["normal"],
+       formats: ["woff"],
+       provider: fontProviders.fontsource(),
+     },
+   ],
+   ```
 
 2. `src/layouts/BaseLayout.astro` — Replace the two `<Font>` tags with an inline style that defines the CSS variables directly:
 
-```astro
-<!-- Replace: -->
-<Font cssVariable="--font-body" preload />
-<Font cssVariable="--font-mono" />
+   ```astro
+   <!-- Replace: -->
+   <Font cssVariable="--font-body" preload />
+   <Font cssVariable="--font-mono" />
 
-<!-- With: -->
-<style is:inline>
-  :root {
-    --font-body:
-      "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, -apple-system,
-      BlinkMacSystemFont, "Segoe UI", sans-serif;
-    --font-mono: ui-monospace, "Cascadia Code", Menlo, Monaco, Consolas, "Courier New", monospace;
-  }
-</style>
-```
+   <!-- With: -->
+   <style is:inline>
+     :root {
+       --font-body:
+         "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, -apple-system,
+         BlinkMacSystemFont, "Segoe UI", sans-serif;
+       --font-mono:
+         ui-monospace, "Cascadia Code", Menlo, Monaco, Consolas, "Courier New", monospace;
+     }
+   </style>
+   ```
 
 > Use `is:inline` so Astro does not scope the `<style>` tag — scoped styles would prevent `:root` from applying globally.
 
@@ -209,7 +208,7 @@ All other CSS files (`global.css`, `post.css`, etc.) already use `var(--font-bod
 
 ### Syntax highlighting
 
-Astro Jing uses Expressive Code for syntax highlighting; please refer to <https://expressive-code.com/>
+Astro Jing uses [Expressive Code](https://expressive-code.com/) for syntax highlighting.
 
 You can adjust its config in [`astro.config.ts`](#astroconfigts). [Themes](https://expressive-code.com/guides/themes/#available-themes)
 
