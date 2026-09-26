@@ -85,7 +85,7 @@ test.describe("RSS feed consistency with sitemap", () => {
 });
 
 test.describe("OG image URL consistency with sitemap", () => {
-  test("article pages: og:image path equals page path (stripped) + '-og.png'", async ({
+  test("article pages: og:image is /og-images/posts/{slug}.{hash}.png", async ({
     page,
     request,
   }) => {
@@ -105,16 +105,18 @@ test.describe("OG image URL consistency with sitemap", () => {
       if (!ogImage) continue;
 
       const ogPath = new URL(ogImage).pathname;
-      const cleanPath = path.replace(/\/$/, "");
-      expect(ogPath, `og:image path for ${path} must be "${cleanPath}-og.png"`).toBe(
-        `${cleanPath}-og.png`,
-      );
+      const slug = path.replace(/\/$/, "").split("/").pop() ?? "";
+      const escapedSlug = slug.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      expect(
+        ogPath,
+        `og:image path for ${path} must be "/og-images/posts/${slug}.{hash}.png"`,
+      ).toMatch(new RegExp(`^/og-images/posts/${escapedSlug}\\.[0-9a-f]{8}\\.png$`));
     }
 
     expect(articleCount, "sitemap must include at least one article page").toBeGreaterThan(0);
   });
 
-  test("non-article pages: og:image path is /og.png", async ({ page, request }) => {
+  test("non-article pages: og:image is /og-images/site.{hash}.png", async ({ page, request }) => {
     const sitemapUrls = await getSitemapPageUrls(request);
 
     for (const sitemapUrl of sitemapUrls) {
@@ -129,7 +131,9 @@ test.describe("OG image URL consistency with sitemap", () => {
       if (!ogImage) continue;
 
       const ogPath = new URL(ogImage).pathname;
-      expect(ogPath, `og:image path for ${path} must be "/og.png"`).toBe("/og.png");
+      expect(ogPath, `og:image path for ${path} must be "/og-images/site.{hash}.png"`).toMatch(
+        /^\/og-images\/site\.[0-9a-f]{8}\.png$/,
+      );
     }
   });
 

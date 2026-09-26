@@ -12,16 +12,29 @@ import { _t, SITE } from "@/config";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { getCanonicalURL } from "@/utils/getCanonicalURL";
 import type { BlogPost } from "@/utils/getPosts";
+import { hashOgContent } from "@/utils/ogImage";
 import { slugifyStr } from "@/utils/slugify";
 
 type Props = BlogPost["data"] & {
+  slug: string;
   prevPost: BlogPost | null;
   nextPost: BlogPost | null;
 };
 
-const { title, description, categories, date, updated, toc, comments, tags, prevPost, nextPost } =
-  Astro.props;
-const ogImage = `${Astro.url.pathname.replace(/\.html$/, "").replace(/\/$/, "")}-og.png`;
+const {
+  title,
+  description,
+  categories,
+  date,
+  updated,
+  toc,
+  comments,
+  tags,
+  slug,
+  prevPost,
+  nextPost,
+} = Astro.props;
+const ogImage = `/og-images/posts/${slug}.${hashOgContent(title, date.toISOString(), ...(tags ?? []))}.png`;
 ---
 
 <BaseLayout

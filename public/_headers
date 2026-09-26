@@ -21,11 +21,7 @@
 /posts/*
   Cache-Control: public, max-age=3600, stale-while-revalidate=604800
 
-/posts/*-og.png
-  ! Cache-Control
-  Cache-Control: public, max-age=31556952, immutable
-
-/og.png
+/og-images/*
   Cache-Control: public, max-age=31556952, immutable
 
 /_astro/*

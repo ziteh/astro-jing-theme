@@ -7,6 +7,7 @@ import Header from "@/components/Header.astro";
 import KatexStyles from "@/components/KatexStyles.astro";
 import { _t, SITE } from "@/config";
 import { getCanonicalURL } from "@/utils/getCanonicalURL";
+import { SITE_OG_HASH } from "@/utils/ogImage";
 
 interface Props {
   title: string;
@@ -23,7 +24,7 @@ const {
   title,
   description,
   ogType = "website",
-  image = "/og.png",
+  image = `/og-images/site.${SITE_OG_HASH}.png`,
   math = false,
   pubDate,
   updatedDate,

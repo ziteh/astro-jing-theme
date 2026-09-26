@@ -4,9 +4,12 @@
 
 import { fontData } from "astro:assets";
 import { outDir } from "astro:config/server";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import satori, { type Font as SatoriFont } from "satori";
 import sharp from "sharp";
+
+import { SITE } from "@/config";
 
 export const OG_COLORS = {
   bg: "#f9f9f8",
@@ -18,6 +21,20 @@ export const OG_COLORS = {
 export const OG_WIDTH = 1200;
 export const OG_HEIGHT = 630;
 export const OG_FONT_FAMILY = "OpenGraphFont";
+
+/**
+ * Returns a short hash (the first 8 hex characters of the SHA-256 of the joined parts).
+ * It is embedded in OG image file names for cache busting, not for security purposes.
+ */
+export function hashOgContent(...parts: (string | number)[]): string {
+  return createHash("sha256").update(parts.join("|")).digest("hex").slice(0, 8);
+}
+
+/**
+ * Hash of the site OG image, which only depends on the site title and description.
+ * The corresponding route is `/og-images/site.[hash].png`.
+ */
+export const SITE_OG_HASH = hashOgContent(SITE.title, SITE.description);
 
 let cachedFonts: SatoriFont[] | null = null;
 async function getFonts(origin: string): Promise<SatoriFont[]> {

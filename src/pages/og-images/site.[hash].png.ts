@@ -1,6 +1,12 @@
-import type { APIRoute } from "astro";
+import type { APIRoute, GetStaticPaths } from "astro";
 import { SITE } from "@/config";
-import { OG_COLORS, OG_FONT_FAMILY, renderOgImage } from "@/utils/ogImage";
+import { OG_COLORS, OG_FONT_FAMILY, renderOgImage, SITE_OG_HASH } from "@/utils/ogImage";
+
+export const getStaticPaths: GetStaticPaths = () => [
+  {
+    params: { hash: SITE_OG_HASH },
+  },
+];
 
 export const GET: APIRoute = async ({ url }) => {
   return renderOgImage(
