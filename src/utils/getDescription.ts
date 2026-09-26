@@ -50,27 +50,39 @@ const regexReplacers: { [key: string]: [RegExp, string] } = {
   linkRef: [/\[(.*?)\]: (.*?)/g, ""],
 };
 
+const stripMarkdown = (content: string): string => {
+  let plainText = content;
+
+  // Remove Markdown syntax before normalising whitespace
+  for (const patternKey in regexReplacers) {
+    const [pattern, replacement] = regexReplacers[patternKey];
+    plainText = plainText.replace(pattern, replacement);
+  }
+
+  return plainText
+    .replace(/<!--([\s\S]*?)-->/g, "")
+    .replace(/<[^>]*>/g, "")
+    .replace(/\\([\\`*{}[\]()#+.!_>-])/g, "$1")
+    .replace(/\s+/g, " ")
+    .trim();
+};
+
 const getDescription = (markdownContent: string): string => {
   // Limit the number of lines to process
   const lines = markdownContent.split(/\r?\n/).slice(0, SITE.getDescriptionMaxLines);
-  const processedContent = lines.join("");
+  const processedContent = lines.join("\n");
 
   // Find the first occurrence of the 'more' tag
   const moreTagMatch = processedContent.match(tagMoreRegex);
 
   // If the 'more' tag is found, use the content before it
   // Otherwise, use the first `SITE.getDescriptionCount` characters
-  let short = moreTagMatch
-    ? moreTagMatch[1]
-    : `${processedContent.substring(0, SITE.getDescriptionCount)} ...`;
+  const content = moreTagMatch ? moreTagMatch[1] : processedContent;
+  const plainText = stripMarkdown(content);
 
-  // Remove Markdown syntax
-  for (const patternKey in regexReplacers) {
-    const [pattern, replacement] = regexReplacers[patternKey];
-    short = short.replace(pattern, replacement);
-  }
+  if (moreTagMatch || plainText.length <= SITE.getDescriptionCount) return plainText;
 
-  return short;
+  return `${plainText.slice(0, SITE.getDescriptionCount).trimEnd()}...`;
 };
 
 export default getDescription;
