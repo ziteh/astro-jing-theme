@@ -91,6 +91,7 @@ Refer to [Astro project structure](https://docs.astro.build/en/basics/project-st
 
 ```text
 ├── public/             # Unprocessed assets
+│   └── _headers        # Custom headers, such as CSP and Cache-Control
 ├── tests/
 ├── src/
 │   ├── config/
