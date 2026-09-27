@@ -13,7 +13,7 @@ import TocStyles from "@/components/TocStyles.astro";
 import { _t, SITE } from "@/config";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import type { BlogPost } from "@/utils/getPosts";
-import { getCanonicalURL } from "@/utils/getURL";
+import { getCanonicalURL, getMarkdownPath } from "@/utils/getURL";
 import { getPostOgHash } from "@/utils/ogImage";
 import { slugifyStr } from "@/utils/slugify";
 
@@ -76,11 +76,7 @@ const ogImage = `/og-images/posts/${slug}.${getPostOgHash(title, date, tags)}.pn
             }
             {
               SITE.viewAsMD && SITE.postMdUrl && (
-                <a
-                  class="markdown-link"
-                  href={`${Astro.url.pathname.replace(/\/$/, "")}.md`}
-                  title="View as Markdown"
-                >
+                <a class="markdown-link" href={getMarkdownPath(Astro.url)} title="View as Markdown">
                   Markdown
                 </a>
               )
