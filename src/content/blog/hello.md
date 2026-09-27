@@ -98,9 +98,9 @@ Basic site information and feature toggles.
 | `defaultFmMath`          | Enable math equations by default                                                  | `false`                        |
 | `transitions`            | Enable [view transitions][astro-vt]                                               | `true`                         |
 | `ogFontPath`             | Path to a local font file for OG images, bypassing the Astro Fonts API            | `fonts/NotoSansTC-Regular.ttf` |
-| `postMdUrl`              | Generate a Markdown version of your blog posts for LLMs to crawl                  | `false`                        |
+| `postMdUrl`              | Generate a Markdown version of your blog posts for LLMs to crawl                  | `true`                         |
 | `llmsTxt`                | Generate llms.txt for LLMs to crawl your blog posts (need `postMdUrl` to be true) | `false`                        |
-| `viewAsMD`               | Add a "View as Markdown" button to post sidebar (need `postMdUrl` to be true)     | `false`                        |
+| `viewAsMD`               | Add a "View as Markdown" button to post (need `postMdUrl` to be true)             | `true`                         |
 | `disqusShortname`        | Disqus shortname                                                                  | `your-disqus-shortname`        |
 | `giscusRepo`             | Giscus repository                                                                 | `user/repo`                    |
 | `giscusRepoId`           | Giscus repository ID                                                              |                                |

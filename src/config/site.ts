@@ -34,9 +34,9 @@ export const SITE = {
   ogFontPath: "fonts/NotoSansTC-Regular.ttf",
 
   // LLM / AI
-  postMdUrl: false, // Generate a Markdown version of your blog posts for LLMs to crawl
+  postMdUrl: true, // Generate a Markdown version of your blog posts for LLMs to crawl
   llmsTxt: false, // Generate llms.txt for LLMs to crawl your blog posts (need postMdUrl to be true)
-  viewAsMD: false, // Add a "View as Markdown" button to post sidebar (need postMdUrl to be true)
+  viewAsMD: true, // Add a "View as Markdown" button to post (need postMdUrl to be true)
 
   // Disqus comments
   disqusShortname: "", // Your Disqus shortname (without https:// and .disqus.com)
