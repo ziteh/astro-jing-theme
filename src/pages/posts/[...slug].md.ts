@@ -3,6 +3,10 @@ import { _t, SITE } from "@/config";
 import getBlogPosts from "@/utils/getPosts";
 
 export async function getStaticPaths() {
+  if (!SITE.postMdUrl) {
+    return [];
+  }
+
   const posts = await getBlogPosts();
   return posts.map((post) => ({
     params: { slug: post.id },
@@ -11,10 +15,6 @@ export async function getStaticPaths() {
 }
 
 export const GET: APIRoute = async ({ props }) => {
-  if (!SITE.postMdUrl) {
-    return new Response(null, { status: 404 });
-  }
-
   const { post } = props;
   const title = post.data.title;
   const desc = post.data.description;

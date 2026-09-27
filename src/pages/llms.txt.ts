@@ -14,9 +14,6 @@ export const GET: APIRoute = async ({ site }) => {
   if (!SITE.llmsTxt) {
     return new Response(null, { status: 404 });
   }
-  if (!SITE.postMdUrl) {
-    throw new Error("postMdUrl must be enabled to generate llms.txt.");
-  }
 
   if (!site) {
     throw new Error("Site URL is not defined.");

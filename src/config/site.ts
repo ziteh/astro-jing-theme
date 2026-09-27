@@ -48,3 +48,10 @@ export const SITE = {
   giscusInputPosition: "bottom",
   giscusTheme: "preferred_color_scheme",
 } as const;
+
+if (SITE.llmsTxt && !SITE.postMdUrl) {
+  throw new Error("SITE.postMdUrl must be enabled when SITE.llmsTxt is enabled.");
+}
+if (SITE.viewAsMD && !SITE.postMdUrl) {
+  throw new Error("SITE.postMdUrl must be enabled when SITE.viewAsMD is enabled.");
+}
