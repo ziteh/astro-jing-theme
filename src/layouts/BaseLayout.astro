@@ -4,7 +4,6 @@ import "@/styles/global.css";
 import { ClientRouter } from "astro:transitions";
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
-import KatexStyles from "@/components/KatexStyles.astro";
 import { _t, SITE } from "@/config";
 import { getCanonicalURL, getMarkdownURL } from "@/utils/getURL";
 import { SITE_OG_HASH } from "@/utils/ogImage";
@@ -14,7 +13,6 @@ interface Props {
   description: string;
   ogType?: "website" | "article";
   image?: string;
-  math?: boolean;
   pubDate?: Date;
   updatedDate?: Date;
   noindex?: boolean;
@@ -25,7 +23,6 @@ const {
   description,
   ogType = "website",
   image = `/og-images/site.${SITE_OG_HASH}.png`,
-  math = false,
   pubDate,
   updatedDate,
   noindex = false,
@@ -117,7 +114,6 @@ const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
     <!-- Font -->
     <Font cssVariable="--font-body" preload />
     <Font cssVariable="--font-mono" />
-    {math && <KatexStyles />}
 
     <!-- Google Search Console https://support.google.com/webmasters/answer/9008080#meta_tag_verification -->
     {

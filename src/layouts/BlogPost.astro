@@ -6,6 +6,7 @@ import IconMenu from "@/assets/icons/menu-2.svg";
 import Disqus from "@/components/comments/Disqus.astro";
 import Giscus from "@/components/comments/Giscus.astro";
 import FormattedDate from "@/components/FormattedDate.astro";
+import KatexStyles from "@/components/KatexStyles.astro";
 import TagPill from "@/components/TagPill.astro";
 import TocScript from "@/components/TocScript.astro";
 import { _t, SITE } from "@/config";
@@ -29,6 +30,7 @@ const {
   updated,
   toc,
   comments,
+  math,
   tags,
   slug,
   prevPost,
@@ -45,6 +47,7 @@ const ogImage = `/og-images/posts/${slug}.${getPostOgHash(title, date, tags)}.pn
   pubDate={date}
   updatedDate={updated}
 >
+  {math && <KatexStyles slot="head" />}
   <main id="main-content">
     <div class="post-layout">
       <article class="prose">
