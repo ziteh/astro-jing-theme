@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { _t, SITE } from "@/config";
 import getBlogPosts from "@/utils/getPosts";
+import { yamlEscape } from "@/utils/yaml";
 
 export async function getStaticPaths() {
   if (!SITE.postMdUrl) {
@@ -22,19 +23,19 @@ export const GET: APIRoute = async ({ props }) => {
   const date = post.data.date.toISOString();
   const updated = post.data.updated?.toISOString() || date;
   const tags = post.data.tags || [];
-  const tagsStr = (tags as string[]).map((t) => `'${t}'`).join(", ");
+  const tagsStr = (tags as string[]).map((t) => `'${yamlEscape(t)}'`).join(", ");
   const categories = post.data.categories || [];
-  const categoriesStr = (categories as string[]).map((c) => `'${c}'`).join(", ");
+  const categoriesStr = (categories as string[]).map((c) => `'${yamlEscape(c)}'`).join(", ");
 
   const frontmatter = [
-    `title: '${title}'`,
-    `description: '${desc}'`,
+    `title: '${yamlEscape(title)}'`,
+    `description: '${yamlEscape(desc)}'`,
     `created: ${date}`,
     updated !== date ? `updated: ${updated}` : null,
     tags.length > 0 ? `tags: [${tagsStr}]` : null,
     categories.length > 0 ? `categories: [${categoriesStr}]` : null,
-    `author: '${SITE.author}'`,
-    `rights: '${_t.rightsStatement}'`,
+    `author: '${yamlEscape(SITE.author)}'`,
+    `rights: '${yamlEscape(_t.rightsStatement)}'`,
   ]
     .filter(Boolean)
     .join("\n");
