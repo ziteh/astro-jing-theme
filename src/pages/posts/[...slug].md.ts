@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { _t, SITE } from "@/config";
 import getBlogPosts from "@/utils/getPosts";
+import { getCanonicalURL } from "@/utils/getURL";
 import { yamlEscape } from "@/utils/yaml";
 
 export async function getStaticPaths() {
@@ -15,13 +16,14 @@ export async function getStaticPaths() {
   }));
 }
 
-export const GET: APIRoute = async ({ props }) => {
+export const GET: APIRoute = async ({ props, site }) => {
   const { post } = props;
   const title = post.data.title;
   const desc = post.data.description;
   const body = post.body;
   const date = post.data.date.toISOString();
   const updated = post.data.updated?.toISOString() || date;
+  const canonicalURL = getCanonicalURL(new URL(`/posts/${post.id}`, site), site);
   const tags = post.data.tags || [];
   const tagsStr = (tags as string[]).map((t) => `'${yamlEscape(t)}'`).join(", ");
   const categories = post.data.categories || [];
@@ -30,6 +32,7 @@ export const GET: APIRoute = async ({ props }) => {
   const frontmatter = [
     `title: '${yamlEscape(title)}'`,
     `description: '${yamlEscape(desc)}'`,
+    `canonical: '${yamlEscape(canonicalURL)}'`,
     `created: ${date}`,
     updated !== date ? `updated: ${updated}` : null,
     tags.length > 0 ? `tags: [${tagsStr}]` : null,
