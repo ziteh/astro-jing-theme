@@ -9,6 +9,7 @@ import FormattedDate from "@/components/FormattedDate.astro";
 import KatexStyles from "@/components/KatexStyles.astro";
 import TagPill from "@/components/TagPill.astro";
 import TocScript from "@/components/TocScript.astro";
+import TocStyles from "@/components/TocStyles.astro";
 import { _t, SITE } from "@/config";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import type { BlogPost } from "@/utils/getPosts";
@@ -48,6 +49,7 @@ const ogImage = `/og-images/posts/${slug}.${getPostOgHash(title, date, tags)}.pn
   updatedDate={updated}
 >
   {math && <KatexStyles slot="head" />}
+  {toc && <TocStyles slot="head" />}
   <main id="main-content">
     <div class="post-layout">
       <article class="prose">
