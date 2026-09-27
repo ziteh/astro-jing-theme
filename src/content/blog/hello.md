@@ -80,31 +80,32 @@ There are some settings that need to be adjusted before deployment.
 
 Basic site information and feature toggles.
 
-| Field                    | Description                                                                       | Example                      |
-| ------------------------ | --------------------------------------------------------------------------------- | ---------------------------- |
-| **`url`\***              | Your site's URL                                                                   | `https://username.github.io` |
-| **`title`\***            | Blog title                                                                        | `My Blog`                    |
-| **`description`\***      | Blog description                                                                  | `A personal blog`            |
-| **`author`\***           | Blog author name                                                                  | `ZiTe`                       |
-| `postsPerHomepage`       | Posts to display per page ([home](/))                                             | `3`                          |
-| `postsPerArchives`       | Posts to display per page ([archives](/archives))                                 | `10`                         |
-| `postsPerAllPosts`       | Posts to display per page ([posts](/posts))                                       | `5`                          |
-| `getDescriptionCount`    | Character count for auto-description                                              | `150`                        |
-| `getDescriptionMaxLines` | Max lines to process for auto-description                                         | `10`                         |
-| `defaultFmTag`           | Default tag for posts                                                             | `Others`                     |
-| `defaultFmCategory`      | Default category for posts                                                        | `""`                         |
-| `defaultFmToc`           | Enable table of contents by default                                               | `false`                      |
-| `defaultFmComments`      | Enable comments by default                                                        | `false`                      |
-| `defaultFmMath`          | Enable math equations by default                                                  | `false`                      |
-| `transitions`            | Enable [view transitions][astro-vt]                                               | `true`                       |
-| `postMdUrl`              | Generate a Markdown version of your blog posts for LLMs to crawl                  | `false`                      |
-| `llmsTxt`                | Generate llms.txt for LLMs to crawl your blog posts (need `postMdUrl` to be true) | `false`                      |
-| `viewAsMD`               | Add a "View as Markdown" button to post sidebar (need `postMdUrl` to be true)     | `false`                      |
-| `disqusShortname`        | Disqus shortname                                                                  | `your-disqus-shortname`      |
-| `giscusRepo`             | Giscus repository                                                                 | `user/repo`                  |
-| `giscusRepoId`           | Giscus repository ID                                                              |                              |
-| `giscusCategory`         | Giscus category name                                                              |                              |
-| `giscusCategoryId`       | Giscus category ID                                                                |                              |
+| Field                    | Description                                                                       | Example                        |
+| ------------------------ | --------------------------------------------------------------------------------- | ------------------------------ |
+| **`url`\***              | Your site's URL                                                                   | `https://username.github.io`   |
+| **`title`\***            | Blog title                                                                        | `My Blog`                      |
+| **`description`\***      | Blog description                                                                  | `A personal blog`              |
+| **`author`\***           | Blog author name                                                                  | `ZiTe`                         |
+| `postsPerHomepage`       | Posts to display per page ([home](/))                                             | `3`                            |
+| `postsPerArchives`       | Posts to display per page ([archives](/archives))                                 | `10`                           |
+| `postsPerAllPosts`       | Posts to display per page ([posts](/posts))                                       | `5`                            |
+| `getDescriptionCount`    | Character count for auto-description                                              | `150`                          |
+| `getDescriptionMaxLines` | Max lines to process for auto-description                                         | `10`                           |
+| `defaultFmTag`           | Default tag for posts                                                             | `Others`                       |
+| `defaultFmCategory`      | Default category for posts                                                        | `""`                           |
+| `defaultFmToc`           | Enable table of contents by default                                               | `false`                        |
+| `defaultFmComments`      | Enable comments by default                                                        | `false`                        |
+| `defaultFmMath`          | Enable math equations by default                                                  | `false`                        |
+| `transitions`            | Enable [view transitions][astro-vt]                                               | `true`                         |
+| `ogFontPath`             | Path to a local font file for OG images, bypassing the Astro Fonts API            | `fonts/NotoSansTC-Regular.ttf` |
+| `postMdUrl`              | Generate a Markdown version of your blog posts for LLMs to crawl                  | `false`                        |
+| `llmsTxt`                | Generate llms.txt for LLMs to crawl your blog posts (need `postMdUrl` to be true) | `false`                        |
+| `viewAsMD`               | Add a "View as Markdown" button to post sidebar (need `postMdUrl` to be true)     | `false`                        |
+| `disqusShortname`        | Disqus shortname                                                                  | `your-disqus-shortname`        |
+| `giscusRepo`             | Giscus repository                                                                 | `user/repo`                    |
+| `giscusRepoId`           | Giscus repository ID                                                              |                                |
+| `giscusCategory`         | Giscus category name                                                              |                                |
+| `giscusCategoryId`       | Giscus category ID                                                                |                                |
 
 > **\***: important
 
@@ -207,6 +208,18 @@ If you prefer **system-native fonts** — for example, to use Traditional Chines
 > Use `is:inline` so Astro does not scope the `<style>` tag — scoped styles would prevent `:root` from applying globally.
 
 All other CSS files (`global.css`, `post.css`, etc.) already use `var(--font-body)` and `var(--font-mono)` and require no changes.
+
+#### OG image font
+
+OG images are rendered by [Satori](https://github.com/vercel/satori), which relies solely on the `--font-og` font's glyphs — it does not fall back to system fonts. By default `--font-og` is fetched via the Astro Fonts API, whose default subset only covers Latin characters. If your post titles/tags contain non-Latin characters (e.g. Chinese, Japanese, and Korean) that aren't in that subset, they will render as missing-glyph boxes in OG images.
+
+To fix this, set `ogFontPath` in [`site.ts`](#sitets) to the path (relative to the project root) of a local font file that covers the characters you need, e.g.:
+
+```ts
+ogFontPath: "fonts/NotoSansTC-Regular.ttf",
+```
+
+When `ogFontPath` is non-empty, that font file is read directly for OG image rendering, bypassing the Astro Fonts API and its subsetting entirely. Leave it as `""` to keep using the Astro Fonts API.
 
 ### Syntax highlighting
 

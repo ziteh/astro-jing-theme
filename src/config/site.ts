@@ -28,6 +28,11 @@ export const SITE = {
   // Config
   transitions: true, // View transitions (https://docs.astro.build/en/guides/view-transitions/)
 
+  // OG image font
+  // Empty: load via the Astro Fonts API font, may not cover non-Latin scripts (e.g. CJK)
+  // Non-empty: path (relative to project root) to a font file to read directly
+  ogFontPath: "fonts/NotoSansTC-Regular.ttf",
+
   // LLM / AI
   postMdUrl: false, // Generate a Markdown version of your blog posts for LLMs to crawl
   llmsTxt: false, // Generate llms.txt for LLMs to crawl your blog posts (need postMdUrl to be true)

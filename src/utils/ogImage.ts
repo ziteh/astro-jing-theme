@@ -6,6 +6,7 @@ import { fontData } from "astro:assets";
 import { outDir } from "astro:config/server";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import satori, { type Font as SatoriFont } from "satori";
 import sharp from "sharp";
 import { SITE } from "@/config";
@@ -32,12 +33,12 @@ export function getPostOgHash(title: string, date: Date, tags: string[]): string
 export const SITE_OG_HASH = hashOgContent("site", SITE.title, SITE.description);
 
 let cachedFonts: SatoriFont[] | null = null;
-async function getFonts(origin: string): Promise<SatoriFont[]> {
-  if (cachedFonts) return cachedFonts;
 
+// Loads the font via the Astro Fonts API font configured as `--font-og` in astro.config.ts
+async function getFontsFromAstroFonts(origin: string): Promise<SatoriFont[]> {
   const faces = fontData["--font-og"];
 
-  cachedFonts = await Promise.all(
+  return Promise.all(
     faces.map(async (face) => {
       const src = face.src[0];
       if (!src) throw new Error("No src in font face");
@@ -50,6 +51,22 @@ async function getFonts(origin: string): Promise<SatoriFont[]> {
       return { name: OG_FONT_FAMILY, data, weight: 400 as const, style: "normal" as const };
     }),
   );
+}
+
+// Loads a font bundled in the project, bypassing the Astro Fonts API entirely
+async function getFontsFromLocalFile(): Promise<SatoriFont[]> {
+  const data = await readFile(join(process.cwd(), SITE.ogFontPath)).then(
+    (b) => b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength) as ArrayBuffer,
+  );
+  return [{ name: OG_FONT_FAMILY, data, weight: 400 as const, style: "normal" as const }];
+}
+
+async function getFonts(origin: string): Promise<SatoriFont[]> {
+  if (cachedFonts) return cachedFonts;
+
+  cachedFonts = SITE.ogFontPath
+    ? await getFontsFromLocalFile()
+    : await getFontsFromAstroFonts(origin);
 
   return cachedFonts;
 }
