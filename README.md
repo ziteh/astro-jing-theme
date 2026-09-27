@@ -1,6 +1,8 @@
 # Astro Jing
 
-A calm blog theme powered by [Astro](https://astro.build/).
+![screenshot](fig/astro-jing-theme-post-light.webp)
+
+A calm blog theme powered by [Astro](https://astro.build/). [Demo site](https://astro-jing-theme.ziteh.dev/).
 
 Features:
 
