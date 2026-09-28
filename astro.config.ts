@@ -134,7 +134,7 @@ export default defineConfig({
     // Search engine
     pagefind(),
     // Compression
-    playformCompress(),
+    playformCompress({ Image: false }),
   ],
   // https://docs.astro.build/en/guides/fonts/
   fonts: [
